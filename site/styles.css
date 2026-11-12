@@ -61,6 +61,7 @@ section { padding:88px 0; }
         radial-gradient(700px 380px at -5% 30%, rgba(43,100,184,.07), transparent 60%); }
 .hero-grid { display:grid; grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:56px; align-items:center; }
 .lead { color:var(--soft); font-size:1.2rem; margin-top:22px; max-width:56ch; }
+.lead.second { margin-top:14px; font-size:1.08rem; }
 .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
 .pills { list-style:none; padding:0; margin:30px 0 0; display:flex; flex-wrap:wrap; gap:8px 10px; }
 .pills li { display:inline-flex; align-items:center; gap:8px; font-size:.9rem; color:var(--soft); background:var(--card);
@@ -77,7 +78,7 @@ section { padding:88px 0; }
 .code-head span { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.22); }
 .code-head b { margin-left:10px; font:500 .8rem var(--mono); color:#9fb3d6; }
 .code pre { margin:0; padding:22px 22px 20px; overflow-x:auto; font:400 .9rem/1.65 var(--mono); }
-.code .k { color:#9fc1f0; } .code .s { color:#f3a871; }
+.code .k { color:#9fc1f0; } .code .s { color:#f3a871; } .code .c { color:#8ea3c7; }
 .code figcaption { padding:13px 22px 16px; border-top:1px solid rgba(255,255,255,.09); font-size:.88rem; color:#c9d3e6; }
 .code figcaption code { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.14); color:#fff; }
 

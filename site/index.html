@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HarnessGateway · AI agents at work in your organization</title>
-<meta name="description" content="HarnessGateway is an open-source platform that runs coding agents in isolated sandboxes behind the OpenAI Responses API. We help organizations design, build and deploy agents on it. Self-host it today; a hosted version is coming soon.">
+<meta name="description" content="HarnessGateway is an open-source platform that runs agents in isolated sandboxes behind the OpenAI Responses API and lets you switch to any agent harness under the hood. We help organizations design, build and deploy agents on it. Self-host it today; a hosted version is coming soon.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HarnessGateway">
 <meta property="og:title" content="AI agents at work in your organization, on a platform you own">
-<meta property="og:description" content="An open-source platform for running coding agents in sandboxes, and a team to build agents on it with you. Self-host today; hosted version coming soon.">
+<meta property="og:description" content="An open-source platform that runs agents and lets you switch to any agent harness under the hood, and a team to build agents on it with you. Self-host today; hosted version coming soon.">
 <meta property="og:url" content="https://harnessgateway.ai/">
 <meta property="og:image" content="https://harnessgateway.ai/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -39,9 +39,10 @@
     <div>
       <p class="eyebrow">Open-source agent infrastructure · Professional services</p>
       <h1>Put AI agents to work in your organization, on a platform you own.</h1>
-      <p class="lead">HarnessGateway is an open-source platform that runs coding agents such as Claude Code and Codex in
-        isolated sandboxes, behind the standard OpenAI Responses API. We help organizations design, build and deploy
-        agents on it, in their own environment.</p>
+      <p class="lead">HarnessGateway is an open-source platform that runs agents, allowing you to switch to any agent
+        harness under the hood: Claude Code, Codex, pi or the next one. Build your agents once; as the agent harness
+        market changes, change the backend, not your application.</p>
+      <p class="lead second">We help organizations design, build and deploy agents on it, in their own environment.</p>
       <div class="actions">
         <a class="btn" href="mailto:sales@harnessgateway.ai?subject=An%20agent%20for%20our%20organization">Talk to us about a build</a>
         <a class="btn ghost" href="https://github.com/HarnessGateway/harnessgateway">Get the open-source core</a>
@@ -66,11 +67,11 @@ client = OpenAI(
 )
 
 r = client.responses.create(
-    model=<span class="s">"claude-code"</span>,
+    model=<span class="s">"claude-code"</span>,  <span class="c"># or "codex", "pi", …</span>
     input=<span class="s">"Write FizzBuzz in Rust and test it"</span>,
 )
 <span class="k">print</span>(r.output_text)</code></pre>
-        <figcaption>Any OpenAI SDK, unchanged. <code>model</code> names the agent to run.</figcaption>
+        <figcaption>Any OpenAI SDK, unchanged. Change <code>model</code> to change the agent harness.</figcaption>
       </figure>
     </div>
   </div>
@@ -111,7 +112,8 @@ r = client.responses.create(
     </div>
 
     <p class="own">Everything we build is yours: the packages, the application code, and an open-source platform with
-      no licence fee.</p>
+      no licence fee. And because the platform is not tied to one agent harness, your agents can move to a better
+      one when it arrives.</p>
   </div>
 </section>
 
@@ -166,7 +168,7 @@ r = client.responses.create(
 <section id="platform" class="band">
   <div class="wrap">
     <p class="eyebrow">The open-source core</p>
-    <h2>One API in front of any agent, with a sandbox around each session.</h2>
+    <h2>One API in front of any agent harness, with a sandbox around each session.</h2>
     <p class="intro">HarnessGateway is the platform under every engagement, and it is yours to run without us. Your
       application sends a standard request; the platform runs it through an agent package in a sandbox and streams
       the work back.</p>
@@ -186,9 +188,9 @@ r = client.responses.create(
           <code>previous_response_id</code> continues a session.</p>
       </article>
       <article>
-        <h3>Any agent, as a package</h3>
-        <p>A package is a manifest and two executables, <code>install</code> and <code>run</code>. Claude Code, Codex,
-          pi or your own CLI: the platform is not tied to a list.</p>
+        <h3>Switch harnesses freely</h3>
+        <p>Each agent harness is a package: a manifest and two executables. Your application picks one by name in
+          <code>model</code>, so moving from Claude Code to Codex, pi or the next harness is a one-line change.</p>
       </article>
       <article>
         <h3>A sandbox per session</h3>
