@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HarnessGateway · AI agents at work in your organization</title>
+<meta name="description" content="HarnessGateway is an open-source platform that runs coding agents in isolated sandboxes behind the OpenAI Responses API. We help organizations design, build and deploy agents on it. Self-host it today; a hosted version is coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HarnessGateway">
+<meta property="og:title" content="AI agents at work in your organization, on a platform you own">
+<meta property="og:description" content="An open-source platform for running coding agents in sandboxes, and a team to build agents on it with you. Self-host today; hosted version coming soon.">
+<meta property="og:url" content="https://harnessgateway.ai/">
+<meta property="og:image" content="https://harnessgateway.ai/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="./"><img src="assets/favicon.png" alt="" width="34" height="34"><span>HarnessGateway</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#services">Services</a>
+      <a href="#demos">Demos</a>
+      <a href="#platform">Platform</a>
+      <a href="#run">Self-host</a>
+      <a href="https://github.com/HarnessGateway/harnessgateway">GitHub</a>
+    </nav>
+    <a class="btn small" href="mailto:sales@harnessgateway.ai?subject=An%20agent%20for%20our%20organization">Talk to us</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Open-source agent infrastructure · Professional services</p>
+      <h1>Put AI agents to work in your organization, on a platform you own.</h1>
+      <p class="lead">HarnessGateway is an open-source platform that runs coding agents such as Claude Code and Codex in
+        isolated sandboxes, behind the standard OpenAI Responses API. We help organizations design, build and deploy
+        agents on it, in their own environment.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:sales@harnessgateway.ai?subject=An%20agent%20for%20our%20organization">Talk to us about a build</a>
+        <a class="btn ghost" href="https://github.com/HarnessGateway/harnessgateway">Get the open-source core</a>
+      </div>
+      <ul class="pills" aria-label="Status">
+        <li><span class="dot ok"></span>Open source, Apache&#8209;2.0</li>
+        <li><span class="dot ok"></span>Self-host it today</li>
+        <li><span class="dot soon"></span>Hosted version coming soon</li>
+      </ul>
+    </div>
+
+    <div class="hero-art">
+      <img class="mascot" src="assets/mascot.png" width="400" height="400"
+           alt="The HarnessGateway mascot, a hermit crab whose shell carries a circuit trace">
+      <figure class="code">
+        <div class="code-head"><span></span><span></span><span></span><b>one request, one agent at work</b></div>
+<pre><code><span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"http://localhost:8000/v1"</span>,
+    api_key=<span class="s">"hg_…"</span>,
+)
+
+r = client.responses.create(
+    model=<span class="s">"claude-code"</span>,
+    input=<span class="s">"Write FizzBuzz in Rust and test it"</span>,
+)
+<span class="k">print</span>(r.output_text)</code></pre>
+        <figcaption>Any OpenAI SDK, unchanged. <code>model</code> names the agent to run.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="band">
+  <div class="wrap">
+    <p class="eyebrow">Professional services</p>
+    <h2>We build the agents. You keep the platform.</h2>
+    <p class="intro">The hard part of an agent is rarely the model. It is the packaging, the permissions, the review
+      step and the place it runs. We work alongside your team to get one agent into real use, then the next.</p>
+
+    <div class="grid four">
+      <article class="card">
+        <span class="num">1</span>
+        <h3>Find the right first job</h3>
+        <p>We look at where your people spend time on work an agent can draft: follow-ups, reports, research, content.
+          We pick one job with a clear owner and a way to check the result.</p>
+      </article>
+      <article class="card">
+        <span class="num">2</span>
+        <h3>Build the worker</h3>
+        <p>Each agent is a package: the agent CLI, its standing instructions, its permission rules, the hosts it may
+          reach and the output your application reads. You get the source.</p>
+      </article>
+      <article class="card">
+        <span class="num">3</span>
+        <h3>Put it in the tools you use</h3>
+        <p>The agent works inside your own application through one API. It drafts; a person reviews and approves
+          what goes out.</p>
+      </article>
+      <article class="card">
+        <span class="num">4</span>
+        <h3>Run it in your environment</h3>
+        <p>We deploy the platform on your infrastructure, on one Linux host or on Kubernetes. Your data and your model
+          provider keys stay with you.</p>
+      </article>
+    </div>
+
+    <p class="own">Everything we build is yours: the packages, the application code, and an open-source platform with
+      no licence fee.</p>
+  </div>
+</section>
+
+<section id="demos">
+  <div class="wrap">
+    <p class="eyebrow">What it looks like</p>
+    <h2>Three applications, each with an agent inside.</h2>
+    <p class="intro">Each is an ordinary web application that sends requests to HarnessGateway and reads the agent's
+      work back. In every one the agent drafts and a person decides.</p>
+
+    <div class="grid three">
+      <article class="demo">
+        <video controls preload="metadata" playsinline poster="assets/demo-crm.jpg" aria-label="Recording of the Showroom CRM demo">
+          <source src="assets/demo-crm.mp4" type="video/mp4">
+        </video>
+        <div class="demo-body">
+          <h3>Showroom CRM</h3>
+          <p>A sales agent reads the whole CRM, answers with names and numbers, and drafts emails and texts into an
+            Outbox. Nothing leaves until a person presses Send.</p>
+          <p class="tag">Agent built on Codex</p>
+        </div>
+      </article>
+      <article class="demo">
+        <video controls preload="metadata" playsinline poster="assets/demo-market-desk.jpg" aria-label="Recording of the Market Desk demo">
+          <source src="assets/demo-market-desk.mp4" type="video/mp4">
+        </video>
+        <div class="demo-body">
+          <h3>Market Desk</h3>
+          <p>A journalist agent reads a commodities desk's primary sources and files a cited draft with charts and the
+            claims to verify. An editor checks each claim and approves.</p>
+          <p class="tag">Agent built on pi</p>
+        </div>
+      </article>
+      <article class="demo">
+        <video controls preload="metadata" playsinline poster="assets/demo-social.jpg" aria-label="Recording of the Social Studio demo">
+          <source src="assets/demo-social.mp4" type="video/mp4">
+        </video>
+        <div class="demo-body">
+          <h3>Social Studio</h3>
+          <p>A social media manager agent writes a post for each platform and plans the sequence. A person approves
+            each post onto the calendar; nothing is posted by the agent.</p>
+          <p class="tag">Agent built on Claude Code</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="after">Recorded live; the minutes the agent spends working are sped up and labelled.
+      <a href="https://github.com/HarnessGateway/demos">Source for all three demos</a></p>
+  </div>
+</section>
+
+<section id="platform" class="band">
+  <div class="wrap">
+    <p class="eyebrow">The open-source core</p>
+    <h2>One API in front of any agent, with a sandbox around each session.</h2>
+    <p class="intro">HarnessGateway is the platform under every engagement, and it is yours to run without us. Your
+      application sends a standard request; the platform runs it through an agent package in a sandbox and streams
+      the work back.</p>
+
+    <ol class="flow" aria-label="How a request runs">
+      <li><b>Your application</b><span>sends an OpenAI Responses request</span></li>
+      <li><b>API</b><span>checks the caller and queues the turn</span></li>
+      <li><b>Box</b><span>one sandbox per session runs the agent package</span></li>
+      <li><b>Door</b><span>the only way out: your allow list, credentials added here</span></li>
+      <li><b>Model provider</b><span>and the hosts you allowed, with your own keys</span></li>
+    </ol>
+
+    <div class="grid three features">
+      <article>
+        <h3>One API</h3>
+        <p>The OpenAI Responses schema in both directions. Any OpenAI SDK works unchanged, and
+          <code>previous_response_id</code> continues a session.</p>
+      </article>
+      <article>
+        <h3>Any agent, as a package</h3>
+        <p>A package is a manifest and two executables, <code>install</code> and <code>run</code>. Claude Code, Codex,
+          pi or your own CLI: the platform is not tied to a list.</p>
+      </article>
+      <article>
+        <h3>A sandbox per session</h3>
+        <p>Every session runs in its own gVisor sandbox with no route out except the door, which enforces your allow
+          and deny entries.</p>
+      </article>
+      <article>
+        <h3>No secret enters the sandbox</h3>
+        <p>Provider keys and other credentials are placeholders inside. The real values are added at the door, only
+          toward the hosts they belong to.</p>
+      </article>
+      <article>
+        <h3>Sessions that survive</h3>
+        <p>After each turn the sandbox saves what changed. A session resumes in a new sandbox from where it stopped.</p>
+      </article>
+      <article>
+        <h3>Metered and traced</h3>
+        <p>Agent time, CPU, memory, network and storage are recorded per organization. Every run, connection and
+          provider call is traced.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap run-grid">
+    <div>
+      <p class="eyebrow">Self-host</p>
+      <h2>Running in a few minutes on one Linux machine.</h2>
+      <p class="intro">You need a Linux machine with Docker Engine; the installer adds the gVisor sandbox for you. It
+        starts the platform, creates your organization and prints your admin invitation.</p>
+<pre class="shell"><code>git clone https://github.com/HarnessGateway/harnessgateway
+cd harnessgateway
+sudo ./deploy/install.sh</code></pre>
+      <ul class="doclinks">
+        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/operations.md#one-host">One-host guide</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/kubernetes.md">Kubernetes with Helm</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/packages.md">Writing an agent package</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/security.md">Security model</a></li>
+      </ul>
+    </div>
+
+    <div class="options">
+      <article class="option">
+        <p class="state now">Available now</p>
+        <h3>Self-hosted</h3>
+        <p>The open-source core on your own infrastructure: your organization, your identity provider, your data.
+          Apache&#8209;2.0.</p>
+        <a class="btn ghost" href="https://github.com/HarnessGateway/harnessgateway">View on GitHub</a>
+      </article>
+      <article class="option">
+        <p class="state soon">Coming soon</p>
+        <h3>Hosted</h3>
+        <p>The same platform, run for you: sign up, add your model provider keys and start building. Join the waitlist
+          to hear when it opens.</p>
+        <a class="btn ghost" href="mailto:sales@harnessgateway.ai?subject=Hosted%20HarnessGateway%20waitlist&amp;body=Please%20let%20me%20know%20when%20the%20hosted%20version%20opens.">Join the waitlist</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Tell us what you want an agent to do.</h2>
+    <p>A short conversation about one job in your organization is the best place to start.</p>
+    <a class="btn" href="mailto:sales@harnessgateway.ai?subject=An%20agent%20for%20our%20organization">Talk to us</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-bar">
+    <a class="brand" href="./"><img src="assets/favicon.png" alt="" width="28" height="28"><span>HarnessGateway</span></a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/HarnessGateway/harnessgateway">GitHub</a>
+      <a href="https://github.com/HarnessGateway/harnessgateway/tree/main/docs">Documentation</a>
+      <a href="https://github.com/HarnessGateway/demos">Demos</a>
+      <a href="https://github.com/HarnessGateway/harnessgateway/blob/main/LICENSE">Apache-2.0</a>
+      <a href="mailto:sales@harnessgateway.ai">Contact</a>
+    </nav>
+    <p>© 2026 HarnessGateway</p>
+  </div>
+</footer>
+</body>
+</html>
