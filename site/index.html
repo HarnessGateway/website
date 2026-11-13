@@ -40,7 +40,7 @@
       <p class="eyebrow">Open-source agent infrastructure · Professional services</p>
       <h1>Put AI agents to work in your organization, on a platform you own.</h1>
       <p class="lead">HarnessGateway is an open-source platform that runs agents, allowing you to switch to any agent
-        harness under the hood: Claude Code, Codex, pi or the next one. Build your agents once; as the agent harness
+        harness under the hood: Claude Code, Codex, pi, Hermes or the next one. Build your agents once; as the agent harness
         market changes, change the backend, not your application.</p>
       <p class="lead second">We help organizations design, build and deploy agents on it, in their own environment.</p>
       <div class="actions">
@@ -67,7 +67,7 @@ client = OpenAI(
 )
 
 r = client.responses.create(
-    model=<span class="s">"claude-code"</span>,  <span class="c"># or "codex", "pi", …</span>
+    model=<span class="s">"claude-code"</span>,  <span class="c"># or "codex", "pi", "hermes"</span>
     input=<span class="s">"Write FizzBuzz in Rust and test it"</span>,
 )
 <span class="k">print</span>(r.output_text)</code></pre>
@@ -94,8 +94,8 @@ r = client.responses.create(
       <article class="card">
         <span class="num">2</span>
         <h3>Build the worker</h3>
-        <p>Each agent is a package: the agent CLI, its standing instructions, its permission rules, the hosts it may
-          reach and the output your application reads. You get the source.</p>
+        <p>Each agent is a harness package: the agent CLI as it ships, its standing instructions and skills, and
+          how its output is read. You get the source.</p>
       </article>
       <article class="card">
         <span class="num">3</span>
@@ -106,8 +106,8 @@ r = client.responses.create(
       <article class="card">
         <span class="num">4</span>
         <h3>Run it in your environment</h3>
-        <p>We deploy the platform on your infrastructure, on one Linux host or on Kubernetes. Your data and your model
-          provider keys stay with you.</p>
+        <p>We deploy the platform on your infrastructure: one host with Docker, or Kubernetes with the enterprise
+          edition. Your data and your model provider keys stay with you.</p>
       </article>
     </div>
 
@@ -168,48 +168,49 @@ r = client.responses.create(
 <section id="platform" class="band">
   <div class="wrap">
     <p class="eyebrow">The open-source core</p>
-    <h2>One API in front of any agent harness, with a sandbox around each session.</h2>
+    <h2>One API in front of any agent harness, with a sandbox around every turn.</h2>
     <p class="intro">HarnessGateway is the platform under every engagement, and it is yours to run without us. Your
-      application sends a standard request; the platform runs it through an agent package in a sandbox and streams
-      the work back.</p>
+      application sends a standard request; the platform runs the harness CLI in a sandbox and streams the work
+      back.</p>
 
     <ol class="flow" aria-label="How a request runs">
       <li><b>Your application</b><span>sends an OpenAI Responses request</span></li>
-      <li><b>API</b><span>checks the caller and queues the turn</span></li>
-      <li><b>Box</b><span>one sandbox per session runs the agent package</span></li>
-      <li><b>Door</b><span>the only way out: your allow list, credentials added here</span></li>
+      <li><b>API</b><span>checks the key and queues the turn</span></li>
+      <li><b>Sandbox</b><span>a fresh one per turn; the session's files are put back, the harness CLI runs</span></li>
+      <li><b>Egress proxy</b><span>the only way out: your network policy, secrets added here</span></li>
       <li><b>Model provider</b><span>and the hosts you allowed, with your own keys</span></li>
     </ol>
 
     <div class="grid three features">
       <article>
         <h3>One API</h3>
-        <p>The OpenAI Responses schema in both directions. Any OpenAI SDK works unchanged, and
-          <code>previous_response_id</code> continues a session.</p>
+        <p>The OpenAI Responses API, unchanged: streaming, background, <code>previous_response_id</code>, Files and
+          Containers. Any OpenAI SDK works. No added fields.</p>
       </article>
       <article>
         <h3>Switch harnesses freely</h3>
-        <p>Each agent harness is a package: a manifest and two executables. Your application picks one by name in
-          <code>model</code>, so moving from Claude Code to Codex, pi or the next harness is a one-line change.</p>
+        <p>Each harness is a package: <code>harness.json</code>, <code>install</code> and <code>run</code>. Your
+          application picks one in <code>model</code>. Switch mid-session and the next harness takes over the same
+          files.</p>
       </article>
       <article>
-        <h3>A sandbox per session</h3>
-        <p>Every session runs in its own gVisor sandbox with no route out except the door, which enforces your allow
-          and deny entries.</p>
+        <h3>A sandbox per turn</h3>
+        <p>Every turn runs in a fresh sandbox you define: an image, limits and a network policy. With gVisor it does
+          not share the host's kernel.</p>
       </article>
       <article>
         <h3>No secret enters the sandbox</h3>
-        <p>Provider keys and other credentials are placeholders inside. The real values are added at the door, only
-          toward the hosts they belong to.</p>
+        <p>The sandbox holds placeholders. The egress proxy puts the real value into requests, only toward the hosts
+          a secret is bound to.</p>
       </article>
       <article>
         <h3>Sessions that survive</h3>
-        <p>After each turn the sandbox saves what changed. A session resumes in a new sandbox from where it stopped.</p>
+        <p>A session keeps the agent's home directory and its working directory. Both are saved after every turn and
+          put back before the next.</p>
       </article>
       <article>
-        <h3>Metered and traced</h3>
-        <p>Agent time, CPU, memory, network and storage are recorded per organization. Every run, connection and
-          provider call is traced.</p>
+        <h3>A trace of every turn</h3>
+        <p>The command that ran, its output, what it cost in tokens and time, and every host it reached.</p>
       </article>
     </div>
   </div>
@@ -219,17 +220,16 @@ r = client.responses.create(
   <div class="wrap run-grid">
     <div>
       <p class="eyebrow">Self-host</p>
-      <h2>Running in a few minutes on one Linux machine.</h2>
-      <p class="intro">You need a Linux machine with Docker Engine; the installer adds the gVisor sandbox for you. It
-        starts the platform, creates your organization and prints your admin invitation.</p>
-<pre class="shell"><code>git clone https://github.com/HarnessGateway/harnessgateway
-cd harnessgateway
-sudo ./deploy/install.sh</code></pre>
+      <h2>Running in a few minutes on one machine.</h2>
+      <p class="intro">You need one machine with Docker. The installer starts the platform and prints the console's
+        address and your first admin key. On a Linux host, <code>--with-gvisor</code> keeps sandboxes off the host's
+        kernel.</p>
+<pre class="shell"><code>curl -fsSL https://raw.githubusercontent.com/HarnessGateway/harnessgateway/main/deploy/install.sh | bash</code></pre>
       <ul class="doclinks">
-        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/operations.md#one-host">One-host guide</a></li>
-        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/kubernetes.md">Kubernetes with Helm</a></li>
-        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/packages.md">Writing an agent package</a></li>
-        <li><a href="https://github.com/HarnessGateway/harnessgateway/blob/main/docs/security.md">Security model</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway#install">Install guide</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway#the-model-string">The model string</a></li>
+        <li><a href="https://github.com/HarnessGateway/harness-packages">Harness packages</a></li>
+        <li><a href="https://github.com/HarnessGateway/harnessgateway/tree/main/packages/shell">Writing a harness package</a></li>
       </ul>
     </div>
 
@@ -237,9 +237,16 @@ sudo ./deploy/install.sh</code></pre>
       <article class="option">
         <p class="state now">Available now</p>
         <h3>Self-hosted</h3>
-        <p>The open-source core on your own infrastructure: your organization, your identity provider, your data.
+        <p>The open-source core on one host with Docker: the API, the console, API keys with roles, your data.
           Apache&#8209;2.0.</p>
         <a class="btn ghost" href="https://github.com/HarnessGateway/harnessgateway">View on GitHub</a>
+      </article>
+      <article class="option">
+        <p class="state soon">On request</p>
+        <h3>Enterprise</h3>
+        <p>The same platform on your Kubernetes cluster, with single sign-on, usage policy and audit export.
+          Licensed.</p>
+        <a class="btn ghost" href="mailto:sales@harnessgateway.ai?subject=HarnessGateway%20Enterprise">Talk to us</a>
       </article>
       <article class="option">
         <p class="state soon">Coming soon</p>
@@ -267,7 +274,7 @@ sudo ./deploy/install.sh</code></pre>
     <a class="brand" href="./"><img src="assets/favicon.png" alt="" width="28" height="28"><span>HarnessGateway</span></a>
     <nav aria-label="Footer">
       <a href="https://github.com/HarnessGateway/harnessgateway">GitHub</a>
-      <a href="https://github.com/HarnessGateway/harnessgateway/tree/main/docs">Documentation</a>
+      <a href="https://github.com/HarnessGateway/harnessgateway#readme">Documentation</a>
       <a href="https://github.com/HarnessGateway/demos">Demos</a>
       <a href="https://github.com/HarnessGateway/harnessgateway/blob/main/LICENSE">Apache-2.0</a>
       <a href="mailto:sales@harnessgateway.ai">Contact</a>
